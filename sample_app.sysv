@@ -1,12 +1,13 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          simple_app
+# Provides:          sample_app
 # Required-Start:    $local_fs $network $named $time $syslog
 # Required-Stop:     $local_fs $network $named $time $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Description:       Simple web app
 ### END INIT INFO
+
 
 WORKDIR='/home/app/sample'
 SCRIPT='./simple_app_linux64'
@@ -44,7 +45,7 @@ uninstall() {
     stop
     rm -f "${PIDFILE}"
     echo "Notice: log file is not be removed: '${LOGFILE}'" >&2
-    update-rc.d -f pgmon remove
+    update-rc.d -f sample_app remove
     rm -fv "$0"
   fi
 }
