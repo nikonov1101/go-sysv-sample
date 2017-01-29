@@ -21,6 +21,12 @@ start() {
     echo 'Service already running' >&2
     return 1
   fi
+
+  # check if log file exists
+  if [ ! -e ${LOGFILE} ] ; then
+    touch ${LOGFILE} && chown ${RUNAS}:${RUNAS} ${LOGFILE}
+  fi
+
   echo 'Starting service...' >&2
   local CMD="cd ${WORKDIR} && ${SCRIPT} >> \"${LOGFILE}\" 2>&1 & echo \$!"
   su -c "${CMD}" ${RUNAS} > "${PIDFILE}"
